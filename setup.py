@@ -35,21 +35,22 @@ setup(
     platforms=['Any'],
     scripts=[],
     provides=[],
-    install_requires=['dnspython', 'IPy', 'distribute', 'cliff', 'gevent', 'greenlet'],
+    install_requires=['requests', 'dnspython', 'IPy', 'distribute',
+        'cliff', 'gevent', 'greenlet'],
     namespace_packages=[],
     packages=find_packages(),
     include_package_data=True,
     entry_points={
         'console_scripts': [
             'musubi = musubi.main:main'
-            ],
+        ],
         'musubi.cli': [
             'ips = musubi.ips:GetIPs',
             'mx = musubi.mx:GetMX',
             'spf = musubi.spf:GetSPF',
             'scan = musubi.scan:Scan',
-            ],
-        },
+        ],
+    },
 
     zip_safe=False,
-    )
+)
