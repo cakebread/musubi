@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Musubi : When spammers ruin your mail server's reputation ( DNSBL ), get out the musubi!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Musubi</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cakebread/musubi">View on GitHub</a>
+
+          <h1 id="project_title">Musubi</h1>
+          <h2 id="project_tagline">When spammers ruin your mail server's reputation ( DNSBL ), get out the musubi!</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cakebread/musubi/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cakebread/musubi/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1></h1>
+
+<h1> Running Musubi</h1>
+
+<h2>Setup</h2>
+
+<p>First, you need to create a virtual environment and activate it.</p>
+
+<p>::</p>
+
+<p>$ pip install virtualenv
+  $ virtualenv musubi
+  $ . musubi/bin/activate
+  (musubi)$ </p>
+
+<p>Next, install <code>musubi</code> in the environment.</p>
+
+<p>::</p>
+
+<p>(musubi)$ pip install musubi</p>
+
+<h2>Usage</h2>
+
+<p>With musubi setup, you can now play with it.</p>
+
+<p>To see a list of commands availble, run::</p>
+
+<p>(musubi)$ musubi --help</p>
+
+<p>Here are some of the commands you can try:</p>
+
+<p>::</p>
+
+<p>(musubi)$ musubi mx cakebread.info
+  (musubi)$ musubi ips cakebread.info
+  (musubi)$ musubi spf cakebread.info
+  (musubi)$ musubi scan cakebread.info</p>
+
+<p>::</p>
+
+<p>To see help for an individual command, include the command name on the
+command line::</p>
+
+<p>(musubi)$ musubi scan --help</p>
+
+<h2>Important</h2>
+
+<p>If you pass an IP range in CIDR notation, please understand what you're 
+doing. Each IP in that range will be tested against 70+ DNSBLs which
+could potentially make thousands of DNS/UDP connections very quickly.
+Do not try this at home! If you are an ISP or web hosting company,
+it should not be a problem.</p>
+
+<h2>Cleaning Up</h2>
+
+<p>Finally, when done, deactivate your virtual environment::</p>
+
+<p>(musubi)$ deactivate
+  $</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Musubi maintained by <a href="https://github.com/cakebread">cakebread</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
