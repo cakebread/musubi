@@ -30,16 +30,14 @@ To see a list of commands availble, run::
 
   (musubi)$ musubi --help
 
-One of the available commands is "mx", try running it on any domain
+Here are some of the commands you can try:
 
 ::
 
   (musubi)$ musubi mx cakebread.info
-
-produces something like the following
-
-   5 mx1.google.com
-   10 mx.fake.google.com
+  (musubi)$ musubi ips cakebread.info
+  (musubi)$ musubi spf cakebread.info
+  (musubi)$ musubi scan cakebread.info
 
 
 ::
@@ -50,6 +48,15 @@ To see help for an individual command, include the command name on the
 command line::
 
   (musubi)$ musubi scan --help
+
+Important
+---------
+
+If you pass an IP range in CIDR notation, please understand what you're 
+doing. Each IP in that range will be tested against 70+ DNSBLs which
+could potentially make thousands of DNS/UDP connections very quickly.
+Do not try this at home! If you are an ISP or web hosting company,
+it should not be a problem.
 
 Cleaning Up
 -----------
