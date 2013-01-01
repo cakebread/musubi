@@ -1,7 +1,8 @@
-=================
- Running Musubi
-=================
+========================
+Musubi the DNSBL Toolkit
+========================
 
+.. image:: http://imgur.com/WqRkx
 Setup
 -----
 
@@ -36,8 +37,8 @@ Here are some of the commands you can try:
 
   (musubi)$ musubi mx cakebread.info
   (musubi)$ musubi ips cakebread.info
-  (musubi)$ musubi spf cakebread.info
-  (musubi)$ musubi scan cakebread.info
+  (musubi)$ musubi spf dreamhost.com
+  (musubi)$ musubi scan toad.com
 
 
 ::
