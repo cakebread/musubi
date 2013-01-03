@@ -23,7 +23,7 @@ setup(
     url='https://github.com/cakebread/musubi',
     download_url='https://github.com/cakebread/musubi/tarball/master',
     classifiers=['Development Status :: 3 - Alpha',
-                 'License :: OSI Approved :: BSD Software License',
+                 'License :: OSI Approved :: BSD License',
                  'Programming Language :: Python',
                  'Programming Language :: Python :: 2',
                  'Programming Language :: Python :: 2.7',
