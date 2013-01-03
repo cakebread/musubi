@@ -1,8 +1,4 @@
 
-"""
-Copyright (c) 2012, Rob Cakebread
-All rights reserved.
-"""
 
 BASE_DNSBLS = [
     'aspews.ext.sorbs.net',
