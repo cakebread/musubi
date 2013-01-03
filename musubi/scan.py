@@ -22,11 +22,11 @@ import logging
 
 import dns
 from cliff.lister import Lister
-from dnsbl import Base
+from .dnsbl import Base
 from IPy import IP
 import requests
 
-from netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
+from .netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
     net_calc
 
 requests_log = logging.getLogger("requests")
@@ -41,7 +41,7 @@ req = requests.get(DNSBL_LIST)
 if req.status_code == 200:
     BASE_DNSBLS = req.text.split()
 else:
-    from dnsbllist import BASE_DNSBLS
+    from .dnsbllist import BASE_DNSBLS
 
 
 class Scan(Lister):

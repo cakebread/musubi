@@ -77,7 +77,7 @@ class Base(object):
         '''Perform query using gevent'''
         try:
             result = socket.gethostbyname(self.build_query(dnsbl))
-        except socket.gaierror, err:
+        except socket.gaierror as err:
             result = False
             err = str(err)
             if not 'Errno 3' in err:
