@@ -35,14 +35,13 @@ requests_log.setLevel(logging.WARNING)
 
 DNSBL_LIST = 'http://musubi.cakebread.info/dnsbl.txt'
 
-#Try to get list of working DNSBLs checked hourly, experimental.
-#TODO Add options to use local list, pipe in, etc.
+# Try to get list of working DNSBLs checked hourly, experimental.
+# TODO Add options to use local list, pipe in, etc.
 req = requests.get(DNSBL_LIST)
 if req.status_code == 200:
     BASE_DNSBLS = req.text.split()
 else:
     from dnsbllist import BASE_DNSBLS
-
 
 
 class Scan(Lister):
@@ -62,7 +61,7 @@ class Scan(Lister):
 
     def dnsbl_scanner(self, rdata, ip):
         for dnsbl, blacklisted in self.dnsbl_check(ip):
-            #Scan.log.debug('Testing: %s' % dnsbl)
+            # Scan.log.debug('Testing: %s' % dnsbl)
             if blacklisted:
                 Scan.log.debug('blacklisted: %s' % dnsbl)
                 try:
