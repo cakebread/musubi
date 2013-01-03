@@ -3,3 +3,6 @@ greenlet
 dnspython
 IPy
 requests
+cliff
+cliff-tablib
+distribute
