@@ -3,20 +3,24 @@
 
 Various DNS related utility functions
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013 Rob Cakebread
 All rights reserved.
 
 """
-
+import logging
 
 import IPy
 from dns import resolver, reversename
+
+log = logging.getLogger(__name__)
 
 
 def build_query(ip, dnsbl):
     '''Reverse the ip and append the name server'''
     reverse = '.'.join(reversed(ip.split('.')))
-    return '{reverse}.{dnsbl}.'.format(reverse=reverse, dnsbl=dnsbl)
+    query = '{reverse}.{dnsbl}.'.format(reverse=reverse, dnsbl=dnsbl)
+    log.debug('Query: %s' % query)
+    return query
 
 
 def get_ips(domain):
@@ -26,7 +30,7 @@ def get_ips(domain):
 
 def get_mx_hosts(domain):
     """Get all domain names for servers in MX records"""
-    return [str(x.exchange)[0:-1] for x in resolver.query(domain, 'MX')]
+    return [x.exchange for x in resolver.query(domain, 'MX')]
 
 
 def get_txt(domain):
@@ -39,7 +43,7 @@ def get_spf(domain):
     txts = get_txt(domain)
     for txt in txts():
         test_txt = txt.lower()
-        # Need to look at SPF spec on this to check about spaces and quotes:
+        #TODO Need to look at SPF spec on this to check about spaces & quotes:
         if 'v=spf1' in test_txt[0:9]:
             yield txt
 
@@ -47,6 +51,7 @@ def get_spf(domain):
 def ptr_from_ip(ip):
     """return PTR domain for given IP"""
     domain = reversename.from_address(ip)
+    log.debug("domain ptr_from_ip: %s" % domain)
     return str(resolver.query(domain, "PTR")[0])
 
 

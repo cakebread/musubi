@@ -24,7 +24,7 @@ import dns
 from cliff.lister import Lister
 from dnsbl import Base
 from IPy import IP
-import requests
+#import requests
 
 from netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
     net_calc
@@ -35,11 +35,16 @@ requests_log.setLevel(logging.WARNING)
 
 DNSBL_LIST = 'http://musubi.cakebread.info/dnsbl.txt'
 
-req = requests.get(DNSBL_LIST)
-if req.status_code == 200:
-    BASE_DNSBLS = req.text.split()
-else:
-    from dnsbllist import BASE_DNSBLS
+#req = requests.get(DNSBL_LIST)
+#if req.status_code == 200:
+#    BASE_DNSBLS = req.text.split()
+#    requests_log.debug("Using http fetched copy of BASE_DNSBLS")
+#else:
+#    from dnsbllist import BASE_DNSBLS
+#    requests_log.debug("Using local copy of BASE_DNSBLS")
+
+from dnsbllist import BASE_DNSBLS
+requests_log.debug("Using local copy of BASE_DNSBLS")
 
 
 class Scan(Lister):
@@ -59,8 +64,9 @@ class Scan(Lister):
 
     def dnsbl_scanner(self, rdata, ip):
         for dnsbl, blacklisted in self.dnsbl_check(ip):
+            #Scan.log.debug('Testing: %s' % dnsbl)
             if blacklisted:
-                Scan.log.debug(dnsbl)
+                Scan.log.debug('blacklisted: %s' % dnsbl)
                 try:
                     query = build_query(ip, dnsbl)
                     txt = get_txt(query)[0]
@@ -94,7 +100,6 @@ class Scan(Lister):
                 ips = ips_from_domains(hosts)
         for ip in ips:
             ip = str(ip)
-            Scan.log.debug(ip)
             rdata = self.dnsbl_scanner(rdata, ip)
 
         if not len(rdata):
