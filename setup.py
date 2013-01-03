@@ -36,7 +36,7 @@ setup(
     scripts=[],
     provides=[],
     install_requires=['requests', 'dnspython', 'IPy', 'distribute',
-        'cliff', 'gevent', 'greenlet'],
+        'cliff', 'cliff-tablib', 'gevent', 'greenlet'],
     namespace_packages=[],
     packages=find_packages(),
     include_package_data=True,
