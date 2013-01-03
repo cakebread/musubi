@@ -16,7 +16,7 @@ except IOError:
 setup(
     name=PROJECT,
     version=VERSION,
-    description='Musubi is a command-line DNSBL checker',
+    description='Musubi is a command-line DNSBL checker and MX toolkit.',
     long_description=long_description,
     author='Rob Cakebread',
     author_email='cakebread@gmail.com',
