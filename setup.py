@@ -16,40 +16,39 @@ except IOError:
 setup(
     name=PROJECT,
     version=VERSION,
-    description='Musubi is a command-line DNSBL checker',
+    description='Musubi is a command-line DNSBL checker and MX toolkit.',
     long_description=long_description,
     author='Rob Cakebread',
     author_email='cakebread@gmail.com',
     url='https://github.com/cakebread/musubi',
     download_url='https://github.com/cakebread/musubi/tarball/master',
     classifiers=['Development Status :: 3 - Alpha',
-                 'License :: OSI Approved :: BSD Software License',
+                 'License :: OSI Approved :: BSD License',
                  'Programming Language :: Python',
                  'Programming Language :: Python :: 2',
                  'Programming Language :: Python :: 2.7',
-                 'Programming Language :: Python :: 3',
-                 'Programming Language :: Python :: 3.2',
                  'Intended Audience :: Developers',
                  'Environment :: Console',
                  ],
     platforms=['Any'],
     scripts=[],
     provides=[],
-    install_requires=['dnspython', 'IPy', 'distribute', 'cliff', 'gevent', 'greenlet'],
+    install_requires=['requests', 'dnspython', 'IPy', 'distribute',
+        'cliff', 'cliff-tablib', 'gevent', 'greenlet'],
     namespace_packages=[],
     packages=find_packages(),
     include_package_data=True,
     entry_points={
         'console_scripts': [
             'musubi = musubi.main:main'
-            ],
+        ],
         'musubi.cli': [
             'ips = musubi.ips:GetIPs',
             'mx = musubi.mx:GetMX',
             'spf = musubi.spf:GetSPF',
             'scan = musubi.scan:Scan',
-            ],
-        },
+        ],
+    },
 
     zip_safe=False,
-    )
+)

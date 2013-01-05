@@ -1,4 +1,8 @@
 gevent
 greenlet
-dnspythond
+dnspython
 IPy
+requests
+cliff
+cliff-tablib
+distribute

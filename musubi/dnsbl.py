@@ -48,6 +48,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
 
+import logging
+
 import gevent
 from gevent import socket
 
@@ -56,10 +58,14 @@ class Base(object):
 
     """DNSBL checker using gevent for super speed"""
 
+    log = logging.getLogger(__name__)
+
     def __init__(self, ip=None, dnsbls=[], timeout=2):
+        #TODO: Make timeout an --option
         self.ip = ip
         self.dnsbls = dnsbls
         self.timeout = timeout
+        Base.log.debug('Checking IP %s' % ip)
 
     def build_query(self, dnsbl):
         '''Reverse the ip and append the name server'''
@@ -71,8 +77,11 @@ class Base(object):
         '''Perform query using gevent'''
         try:
             result = socket.gethostbyname(self.build_query(dnsbl))
-        except socket.gaierror:
+        except socket.gaierror as err:
             result = False
+            err = str(err)
+            if not 'Errno 3' in err:
+                Base.log.debug('Base.query.exception: %s %s' % (dnsbl, err))
         return dnsbl, result
 
     def check(self):

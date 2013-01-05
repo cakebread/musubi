@@ -1,8 +1,4 @@
 
-"""
-Copyright (c) 2012, Rob Cakebread
-All rights reserved.
-"""
 
 BASE_DNSBLS = [
     'aspews.ext.sorbs.net',
@@ -23,7 +19,6 @@ BASE_DNSBLS = [
     'dnsbl-2.uceprotect.net',
     'dnsbl-3.uceprotect.net',
     'dnsbl.ahbl.org',
-    'dnsbl.cyberlogic.net',
     'dnsbl.inps.de',
     'dnsbl.njabl.org',
     'dnsbl.sorbs.net',
@@ -49,6 +44,7 @@ BASE_DNSBLS = [
     'osrs.dnsbl.net.au',
     'owfs.dnsbl.net.au',
     'owps.dnsbl.net.au'
+    'pbl.spamhaus.org',
     'phishing.rbl.msrbl.net',
     'probes.dnsbl.net.au'
     'proxy.bl.gweep.ca',
@@ -62,6 +58,7 @@ BASE_DNSBLS = [
     'residential.block.transip.nl',
     'ricn.dnsbl.net.au',
     'rmst.dnsbl.net.au',
+    'sbl.spamhaus.org',
     'short.rbl.jp',
     'smtp.dnsbl.sorbs.net',
     'socks.dnsbl.sorbs.net',
@@ -82,6 +79,7 @@ BASE_DNSBLS = [
     'virus.rbl.msrbl.net',
     'web.dnsbl.sorbs.net',
     'wormrbl.imp.ch',
+    'xbl.spamhaus.org',
     'zen.spamhaus.org',
     'zombie.dnsbl.sorbs.net',
 ]

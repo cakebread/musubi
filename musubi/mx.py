@@ -33,9 +33,9 @@ class GetMX(Lister):
         return (('Priority', 'Mail Server Domain Name', 'IP', 'PTR'),
                ((
                 x.preference,
-                str(x.exchange)[:-1],
-                dns.resolver.query(str(x.exchange)[:-1], 'A')[0],
+                str(x.exchange).lower(),
+                dns.resolver.query(str(x.exchange), 'A')[0],
                 socket.gethostbyaddr(
                 str(dns.resolver.query(
-                    str(x.exchange)[:-1], 'A')[0]))[0]
+                    str(x.exchange), 'A')[0]))[0]
                 ) for x in dns.resolver.query(domain, 'MX')))

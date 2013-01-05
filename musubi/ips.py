@@ -11,7 +11,7 @@ All rights reserved.
 import logging
 
 from cliff.lister import Lister
-from netdns import get_mx_hosts, ips_from_domains
+from .netdns import get_mx_hosts, ips_from_domains
 
 
 class GetIPs(Lister):
