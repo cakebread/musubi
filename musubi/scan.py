@@ -27,7 +27,7 @@ from IPy import IP
 import requests
 
 from .netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
-    net_calc
+    net_calc, verify_domain
 
 requests_log = logging.getLogger("requests")
 requests_log.setLevel(logging.WARNING)
@@ -93,8 +93,11 @@ class Scan(Lister):
                 ip = IP(arg)
                 ips = [ip]
             except ValueError:
-                hosts = get_mx_hosts(arg)
-                ips = ips_from_domains(hosts)
+                if verify_domain(arg):
+                    hosts = get_mx_hosts(arg)
+                    ips = ips_from_domains(hosts)
+                else:
+                    raise RuntimeError('Can not lookup domain: %s' % arg)
         for ip in ips:
             ip = str(ip)
             rdata = self.dnsbl_scanner(rdata, ip)
@@ -102,5 +105,6 @@ class Scan(Lister):
         if not len(rdata):
             # TODO: Check cliff docs for better way to exit if no results!
             rdata.append((("", "", "", "")))
+            #raise RuntimeError('%s is not listed on any DNSBLs monitored by Musubi.' % arg)
         Scan.log.debug(rdata)
         return (('IP', 'DNSBL Host', 'Response Code', 'DNS TXT Record'), rdata)
