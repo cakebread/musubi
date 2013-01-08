@@ -18,6 +18,7 @@ give that, e.g.
 
 """
 
+import sys
 import logging
 
 import dns
