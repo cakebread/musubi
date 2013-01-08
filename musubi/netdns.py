@@ -14,6 +14,18 @@ from dns import resolver, reversename
 
 log = logging.getLogger(__name__)
 
+def verify_domain(domain):
+    '''Verify if host name exists'''
+    try:
+        hosts = get_mx_hosts(domain)
+        if len(hosts):
+            return True
+    except resolver.NXDOMAIN:
+        log.debug('NXDOMAIN: %s' % domain)
+        return
+    except resolver.NoAnswer:
+        log.debug('NoAnswer: %s' % domain)
+        return
 
 def build_query(ip, dnsbl):
     '''Reverse the ip and append the name server'''
