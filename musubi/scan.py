@@ -23,10 +23,10 @@ import logging
 
 import dns
 from cliff.lister import Lister
-from .dnsbl import Base
 from IPy import IP
 import requests
 
+from .dnsbl import Base
 from .netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
     net_calc, verify_domain
 
