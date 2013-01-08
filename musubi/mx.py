@@ -34,7 +34,7 @@ class GetMX(Lister):
         domain = parsed_args.getmx
         if verify_domain(domain):
             return (('Priority', 'Mail Server Domain Name', 'IP', 'PTR'),
-                ((
+                   ((
                     x.preference,
                     str(x.exchange).lower(),
                     dns.resolver.query(str(x.exchange), 'A')[0],

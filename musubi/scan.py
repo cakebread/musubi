@@ -105,6 +105,7 @@ class Scan(Lister):
         if not len(rdata):
             # TODO: Check cliff docs for better way to exit if no results!
             rdata.append((("", "", "", "")))
-            #raise RuntimeError('%s is not listed on any DNSBLs monitored by Musubi.' % arg)
+            # raise RuntimeError('%s is not listed on any DNSBLs monitored by
+            # Musubi.' % arg)
         Scan.log.debug(rdata)
         return (('IP', 'DNSBL Host', 'Response Code', 'DNS TXT Record'), rdata)
