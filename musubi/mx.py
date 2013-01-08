@@ -14,7 +14,7 @@ import socket
 from cliff.lister import Lister
 import dns.resolver
 
-from netdns import verify_domain
+from .netdns import verify_domain
 
 
 class GetMX(Lister):
