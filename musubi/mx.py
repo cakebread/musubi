@@ -3,7 +3,7 @@
 
 Look up MX records for a domain, show IP addresses, PTRs
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013, Rob Cakebread
 All rights reserved.
 
 """
@@ -13,6 +13,8 @@ import socket
 
 from cliff.lister import Lister
 import dns.resolver
+
+from .netdns import verify_domain
 
 
 class GetMX(Lister):
@@ -30,12 +32,15 @@ class GetMX(Lister):
     def take_action(self, parsed_args):
         """Take action for this command"""
         domain = parsed_args.getmx
-        return (('Priority', 'Mail Server Domain Name', 'IP', 'PTR'),
-               ((
-                x.preference,
-                str(x.exchange).lower(),
-                dns.resolver.query(str(x.exchange), 'A')[0],
-                socket.gethostbyaddr(
-                str(dns.resolver.query(
-                    str(x.exchange), 'A')[0]))[0]
-                ) for x in dns.resolver.query(domain, 'MX')))
+        if verify_domain(domain):
+            return (('Priority', 'Mail Server Domain Name', 'IP', 'PTR'),
+                   ((
+                    x.preference,
+                    str(x.exchange).lower(),
+                    dns.resolver.query(str(x.exchange), 'A')[0],
+                    socket.gethostbyaddr(
+                    str(dns.resolver.query(
+                        str(x.exchange), 'A')[0]))[0]
+                    ) for x in dns.resolver.query(domain, 'MX')))
+        else:
+            raise RuntimeError('Can not lookup domain: %s' % domain)

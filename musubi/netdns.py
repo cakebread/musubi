@@ -15,6 +15,20 @@ from dns import resolver, reversename
 log = logging.getLogger(__name__)
 
 
+def verify_domain(domain):
+    '''Verify if host name exists'''
+    try:
+        hosts = get_mx_hosts(domain)
+        if len(hosts):
+            return True
+    except resolver.NXDOMAIN:
+        log.debug('NXDOMAIN: %s' % domain)
+        return
+    except resolver.NoAnswer:
+        log.debug('NoAnswer: %s' % domain)
+        return
+
+
 def build_query(ip, dnsbl):
     '''Reverse the ip and append the name server'''
     reverse = '.'.join(reversed(ip.split('.')))
@@ -43,7 +57,7 @@ def get_spf(domain):
     txts = get_txt(domain)
     for txt in txts():
         test_txt = txt.lower()
-        #TODO Need to look at SPF spec on this to check about spaces & quotes:
+        # TODO Need to look at SPF spec on this to check about spaces & quotes:
         if 'v=spf1' in test_txt[0:9]:
             yield txt
 
