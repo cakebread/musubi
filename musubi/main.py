@@ -20,7 +20,7 @@ class MusubiApp(App):
     def __init__(self):
         super(MusubiApp, self).__init__(
             description='Musubi DNSBL checker',
-            version='0.1',
+            version='0.2',
             command_manager=CommandManager('musubi.cli'),
         )
 
