@@ -3,7 +3,7 @@
 
 Scan multiple DNSBLs for IP addresss or domain.
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013 Rob Cakebread
 All rights reserved.
 
 
@@ -18,16 +18,17 @@ give that, e.g.
 
 """
 
+import sys
 import logging
 
 import dns
 from cliff.lister import Lister
-from .dnsbl import Base
 from IPy import IP
 import requests
 
+from .dnsbl import Base
 from .netdns import get_mx_hosts, ips_from_domains, get_txt, build_query, \
-    net_calc
+    net_calc, verify_domain
 
 requests_log = logging.getLogger("requests")
 requests_log.setLevel(logging.WARNING)
@@ -93,14 +94,17 @@ class Scan(Lister):
                 ip = IP(arg)
                 ips = [ip]
             except ValueError:
-                hosts = get_mx_hosts(arg)
-                ips = ips_from_domains(hosts)
+                if verify_domain(arg):
+                    hosts = get_mx_hosts(arg)
+                    ips = ips_from_domains(hosts)
+                else:
+                    raise RuntimeError('Can not lookup domain: %s' % arg)
         for ip in ips:
             ip = str(ip)
             rdata = self.dnsbl_scanner(rdata, ip)
 
         if not len(rdata):
-            # TODO: Check cliff docs for better way to exit if no results!
-            rdata.append((("", "", "", "")))
+            Scan.log.debug("Not found on any DNSBL lists.")
+            sys.exit(0)
         Scan.log.debug(rdata)
         return (('IP', 'DNSBL Host', 'Response Code', 'DNS TXT Record'), rdata)

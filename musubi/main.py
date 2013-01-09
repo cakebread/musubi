@@ -1,7 +1,7 @@
 
 """
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013 Rob Cakebread
 All rights reserved.
 
 """
@@ -20,7 +20,7 @@ class MusubiApp(App):
     def __init__(self):
         super(MusubiApp, self).__init__(
             description='Musubi DNSBL checker',
-            version='0.1',
+            version='0.2',
             command_manager=CommandManager('musubi.cli'),
         )
 
@@ -39,9 +39,16 @@ class MusubiApp(App):
 def main(argv=sys.argv[1:]):
     myapp = MusubiApp()
     if len(argv):
-        return myapp.run(argv)
+        try:
+            return myapp.run(argv)
+        except ValueError, err:
+            #Command does not exist
+            MusubiApp.log.error(err)
+            sys.exit(2)
+        except KeyboardInterrupt, err:
+            MusubiApp.log.error(err)
+            pass
     else:
-        # It goes into interactive mode by default if no args, we want help
         return myapp.run(['-h'])
 
 
