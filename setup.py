@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 PROJECT = 'musubi'
-VERSION = '0.1'
+VERSION = '0.2'
 
 import distribute_setup
 distribute_setup.use_setuptools()
