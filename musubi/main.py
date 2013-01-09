@@ -39,9 +39,16 @@ class MusubiApp(App):
 def main(argv=sys.argv[1:]):
     myapp = MusubiApp()
     if len(argv):
-        return myapp.run(argv)
+        try:
+            return myapp.run(argv)
+        except ValueError, err:
+            #Command does not exist
+            MusubiApp.log.error(err)
+            sys.exit(2)
+        except KeyboardInterrupt, err:
+            MusubiApp.log.error(err)
+            pass
     else:
-        # It goes into interactive mode by default if no args, we want help
         return myapp.run(['-h'])
 
 
