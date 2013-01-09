@@ -3,7 +3,7 @@
 
 Look up MX records for a domain, show IP addresses, PTRs
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013, Rob Cakebread
 All rights reserved.
 
 """

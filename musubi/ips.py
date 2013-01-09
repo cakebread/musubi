@@ -3,7 +3,7 @@
 
 Look up IP addresses for all mail servers in MX records
 
-Copyright (c) 2012, Rob Cakebread
+Copyright (c) 2012, 2013 Rob Cakebread
 All rights reserved.
 
 """
